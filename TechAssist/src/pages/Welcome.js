@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, StyleSheet, View, Image, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet, View, Image, TouchableOpacity, StatusBar } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function Welcome({ navigation }) {
@@ -7,6 +7,9 @@ export default function Welcome({ navigation }) {
     return (
 
         <View style={styles.container}>
+            <StatusBar
+                backgroundColor="#1C1C1C"
+            />
 
             <View style={styles.techassist}>
 
@@ -44,7 +47,7 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
         alignItems: 'center',
         height: '100%',
         width: '100%',
@@ -84,18 +87,19 @@ const styles = StyleSheet.create({
     },
 
     cadastro: {
-        height: '40%',
+        height: '22%',
         backgroundColor: '#2A7B4D',
-        padding: 10,
+        paddingHorizontal: 20,
         marginVertical: 20,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        borderRadius: 30,
     },
 
     cadastroText: {
         color: 'white',
-        fontSize: 16,
+        fontSize: 20,
         textAlign: 'left',
     },
 
@@ -106,7 +110,7 @@ const styles = StyleSheet.create({
     loginText: {
         textAlign: 'center',
         color: '#2A7B4D',
-        fontSize: 16,
+        fontSize: 20,
     },
 
 });

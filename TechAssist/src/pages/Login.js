@@ -1,19 +1,33 @@
 import React, { useState } from 'react';
-import { Text, StyleSheet, View, Image, TouchableOpacity, TextInput } from 'react-native';
+import { Text, StyleSheet, View, Image, TouchableOpacity, TextInput, SafeAreaView, StatusBar, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { auth } from '../../firebaseConfig';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 export default function Login({ navigation }) {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
 
+    const handleLogin = async () => {
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, senha);
+            const user = userCredential.user;
+
+            // Redireciona para a tela principal após o login
+            navigation.navigate('Home');
+        } catch (error) {
+            Alert.alert("Erro", error.message);
+        }
+    };
+
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
+            <StatusBar backgroundColor="#1C1C1C" />
 
             <View style={styles.backContainer}>
                 <TouchableOpacity style={styles.back} onPress={() => navigation.goBack(null)}>
                     <Ionicons name="arrow-back" size={36} color="#2A7B4D" />
                 </TouchableOpacity>
-
             </View>
 
             <View style={styles.header}>
@@ -25,7 +39,6 @@ export default function Login({ navigation }) {
             </View>
 
             <View style={styles.inputs}>
-
                 <TextInput
                     style={styles.input}
                     placeholder='E-mail'
@@ -39,62 +52,54 @@ export default function Login({ navigation }) {
                     placeholderTextColor='white'
                     value={senha}
                     onChangeText={setSenha}
+                    secureTextEntry={true}
                 />
                 <TouchableOpacity style={styles.senhaButton} onPress={() => navigation.navigate('Senha')}>
                     <Text style={styles.senhaText}>Esqueci a senha</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.logarButton} onPress={() => navigation.navigate('Login')}>
+                <TouchableOpacity style={styles.logarButton} onPress={handleLogin}>
                     <Text style={styles.logarText}>Continuar</Text>
                 </TouchableOpacity>
-
             </View>
-        </View>
+        </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
-
     container: {
         flex: 1,
         backgroundColor: '#1C1C1C',
         gap: 40,
     },
-
     backContainer: {
         margin: 10,
-        width: '55px',
+        width: '15%',
     },
-
     back: {
         borderRadius: 999,
         backgroundColor: '#373737',
         padding: 10,
     },
-
     header: {
         justifyContent: 'center',
         alignItems: 'center',
     },
-
     logo: {
         width: 350,
         height: 150,
         resizeMode: 'contain',
     },
-
     headerText: {
         color: 'white',
         fontSize: 24,
         fontWeight: 'bold',
         marginBottom: 20,
     },
-
     inputs: {
         flex: 1,
         alignItems: 'center',
         gap: 20,
     },
-
     input: {
         width: '90%',
         height: 50,
@@ -103,18 +108,15 @@ const styles = StyleSheet.create({
         backgroundColor: '#343434',
         color: 'white',
     },
-
     senhaButton: {
         width: '90%',
         margin: 10,
     },
-
     senhaText: {
         textAlign: 'left',
         fontWeight: 'bold',
         color: '#2A7B4D',
     },
-
     logarButton: {
         width: '90%',
         height: 50,
@@ -123,7 +125,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-
     logarText: {
         color: 'white',
         fontSize: 16,

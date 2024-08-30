@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { Text, StyleSheet, View, Image, TouchableOpacity, TextInput } from 'react-native';
+import { Text, StyleSheet, View, Image, TouchableOpacity, TextInput, SafeAreaView, StatusBar } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function Senha({ navigation }) {
     const [email, setEmail] = useState('');
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
+            <StatusBar
+            backgroundColor="#1C1C1C"
+            />
 
             <View style={styles.backContainer}>
                 <TouchableOpacity style={styles.back} onPress={() => navigation.goBack(null)}>
@@ -37,7 +40,7 @@ export default function Senha({ navigation }) {
                 </TouchableOpacity>
 
             </View>
-        </View>
+        </SafeAreaView>
     );
 }
 
@@ -51,7 +54,7 @@ const styles = StyleSheet.create({
 
     backContainer: {
         margin: 10,
-        width: '55px',
+        width: '15%',
     },
 
     back: {
