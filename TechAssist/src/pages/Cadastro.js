@@ -24,9 +24,9 @@ export default function Cadastro({ navigation }) {
             await setDoc(doc(db, "users", user.uid), {
                 nome: nome,
                 email: email,
-            },
-                Alert.alert("Sucesso", "Conta criada com sucesso!")
-            );
+            });
+
+            Alert.alert("Sucesso", "Conta criada com sucesso!");
 
             setNome('');
             setEmail('');
@@ -41,11 +41,9 @@ export default function Cadastro({ navigation }) {
 
     return (
         <SafeAreaView style={styles.container}>
-            <StatusBar
-                backgroundColor="#1C1C1C"
-            />
+            <StatusBar backgroundColor="#1C1C1C" />
             <View style={styles.backContainer}>
-                <TouchableOpacity style={styles.back} onPress={() => navigation.goBack(null)}>
+                <TouchableOpacity style={styles.back} onPress={() => navigation.goBack()}>
                     <Ionicons name="arrow-back" size={36} color="#2A7B4D" />
                 </TouchableOpacity>
             </View>
