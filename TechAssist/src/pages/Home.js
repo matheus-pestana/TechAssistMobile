@@ -1,21 +1,32 @@
 import React, { useState } from 'react';
-import { Text, StyleSheet, View, Image, TouchableOpacity, TextInput, SafeAreaView, StatusBar, Alert } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Text, StyleSheet, View, Image, TouchableOpacity, SafeAreaView, StatusBar, Alert } from 'react-native';
 import { auth } from '../../firebaseConfig';
 import { signOut } from 'firebase/auth';
 
 export default function Home({ navigation }) {
-    const [email, setEmail] = useState('');
-    const [senha, setSenha] = useState('');
-
     const handleLogout = () => {
-        signOut(auth)
-            .then(() => {
-                navigation.navigate('Login');
-            })
-            .catch((error) => {
-                Alert.alert("Erro", error.message);
-            });
+        Alert.alert(
+            "Confirmar Logout",
+            "Você tem certeza que deseja sair?",
+            [
+                {
+                    text: "Cancelar",
+                    style: "cancel"
+                },
+                {
+                    text: "Ok",
+                    onPress: () => {
+                        signOut(auth)
+                            .then(() => {
+                                navigation.navigate('Login');
+                            })
+                            .catch((error) => {
+                                Alert.alert("Erro", error.message);
+                            });
+                    }
+                }
+            ]
+        );
     };
 
     return (
@@ -31,7 +42,7 @@ export default function Home({ navigation }) {
                 <Text style={styles.headerText}>Bem-vindo</Text>
             </View>
             <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-                <Text style={styles.logoutText}>Logout</Text>
+                <Text style={styles.logoutText}>Sair</Text>
             </TouchableOpacity>
         </SafeAreaView>
     );

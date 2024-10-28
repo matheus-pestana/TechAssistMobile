@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
         alignItems: 'center',
         height: '100%',
         width: '100%',
@@ -61,8 +61,8 @@ const styles = StyleSheet.create({
     },
 
     logo: {
-        width: 175,
-        height: 175,
+        width: 200,
+        height: 150,
     },
 
     nome: {
@@ -87,14 +87,14 @@ const styles = StyleSheet.create({
     },
 
     cadastro: {
-        height: '22%',
+        width: '100%',
+        height: 50,
+        borderRadius: 30,
         backgroundColor: '#2A7B4D',
-        paddingHorizontal: 20,
-        marginVertical: 20,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        borderRadius: 30,
+        padding: 20,
     },
 
     cadastroText: {
